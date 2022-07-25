@@ -1,6 +1,6 @@
 # template_spam_playtore
 
-A new Flutter project.
+Template ini dibuat guna mempermudah membuat project flutter, karena didalam sudah tersedia package2 yang wajib digunakan untuk bermain di dunia playstore.
 
 ## Getting Started
 
