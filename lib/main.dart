@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:template_spam_playtore/constants/colors_style.dart';
 import 'package:template_spam_playtore/controllers/admob_controller.dart';
 import 'package:template_spam_playtore/controllers/fan_controller.dart';
@@ -12,6 +13,7 @@ void main() {
   HttpOverrides.global = MyHttpOverrides();
   AdmobController.initAdmob;
   FanController.initFan;
+  //  OneSignal.shared.setAppId("5d8423d8-d747-453b-815a-3a96c79cca3b");
   runApp(const MyApp());
 }
 
