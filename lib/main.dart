@@ -1,16 +1,17 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:template_spam_playtore/constants/colors_style.dart';
+import 'package:template_spam_playtore/controllers/admob_controller.dart';
+import 'package:template_spam_playtore/controllers/fan_controller.dart';
 import 'package:template_spam_playtore/routes/route.dart';
-import 'package:template_spam_playtore/views/pages/validation_page/validation_page.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart'; 
+import 'package:template_spam_playtore/views/pages/validation_page/validation_page.dart'; 
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   HttpOverrides.global = MyHttpOverrides();
-  MobileAds.instance.initialize();
+  AdmobController.initAdmob;
+  FanController.initFan;
   runApp(const MyApp());
 }
 

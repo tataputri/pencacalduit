@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-class NativeAdmobCustom extends StatefulWidget {
+class CostumNativeAdmob extends StatefulWidget {
   final String unitId;
-    const NativeAdmobCustom({Key? key, required this.unitId}) : super(key: key);
+  final double height;
+  const CostumNativeAdmob({Key? key, required this.unitId, required this.height}) : super(key: key);
 
   @override
-  State<NativeAdmobCustom> createState() => NativeAdmobCustomState();
+  State<CostumNativeAdmob> createState() => CostumNativeAdmobState();
 }
 
-class NativeAdmobCustomState extends State<NativeAdmobCustom> {
+class CostumNativeAdmobState extends State<CostumNativeAdmob> {
   NativeAd? nativeAd;
   bool isLoaded = false;
 
@@ -22,8 +23,8 @@ class NativeAdmobCustomState extends State<NativeAdmobCustom> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 70,
-      child:isLoaded ? AdWidget(ad: nativeAd!) : Container(),
+      height: widget.height,
+      child: isLoaded ? AdWidget(ad: nativeAd!) : Container(),
     );
   }
 
