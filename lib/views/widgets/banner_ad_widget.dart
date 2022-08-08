@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:template_spam_playtore/controllers/admob_controller.dart';
+import 'package:template_spam_playtore/services/admob_service.dart';
 
 class CostumBannerAdmob extends StatelessWidget {
   final String unitId;
@@ -12,7 +12,7 @@ class CostumBannerAdmob extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       child: AdWidget(
-        ad: AdmobController.bannerAd(
+        ad: AdmobService.bannerAd(
             unitId: unitId,
             adSize: adSize),
       ),

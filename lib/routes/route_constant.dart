@@ -1,3 +1,3 @@
-const String tspRouteHome = "/home";
-const String tspRouteValidation = "/validation";
-const String tspRouteDetail = "/detail";
+const String xRouteVaValidation = "/";
+const String xRouteHome = "/home";
+const String xRouteDetail = "/detail";

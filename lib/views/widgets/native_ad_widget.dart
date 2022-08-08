@@ -22,7 +22,7 @@ class CostumNativeAdmobState extends State<CostumNativeAdmob> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: widget.height,
       child: isLoaded ? AdWidget(ad: nativeAd!) : Container(),
     );

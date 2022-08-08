@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:template_spam_playtore/controllers/admob_controller.dart';
-import 'package:template_spam_playtore/controllers/fan_controller.dart';
+import 'package:template_spam_playtore/services/admob_service.dart';
+import 'package:template_spam_playtore/services/fan_service.dart';
+import 'package:template_spam_playtore/models/model_route.dart';
+import 'package:template_spam_playtore/models/model_validation.dart';
 
 class GoRoute {
   static int initialClick = 0;
@@ -8,85 +10,83 @@ class GoRoute {
   static push({
     required BuildContext context,
     required String routeName,
-    required int intervalClick,
-    required String typeAds,
-    String? unitId,
-    String? placementId,
+    required ModelValidation modelValidation,
   }) {
     initialClick++;
-    if (initialClick % intervalClick == 0) {
-      switch (typeAds) {
+    if (initialClick % modelValidation.ads!.interval! == 0) {
+      switch (modelValidation.ads!.activeAds) {
         case "fan":
-          return FanController.fanInterstitial(
+          return FanService.fanInterstitial(
             context: context,
             typePush: 'push',
             nameRoutem: routeName,
-            placementId: placementId,
+            placementId: modelValidation.ads!.fan!.fanInterstitialId,
+
           );
         case "admob":
-          return AdmobController.interstitialAd(
+          return AdmobService.interstitialAd(
             context: context,
             typePush: 'push',
             nameRoutem: routeName,
-            unitIdInt: unitId!,
+            unitIdInt: modelValidation.ads!.admob!.admobInterstitialId!,
           );
         default:
       }
     } else {
-      Navigator.pushNamed(context, routeName);
+      Navigator.pushNamed(context, routeName,
+          arguments: ModelRoute(modelValidation: modelValidation));
     }
   }
 
   static pushReplace({
     required BuildContext context,
     required String routeName,
-    required int intervalClick,
-    required String typeAds,
-    String? unitId,
-    String? placementId,
+    required ModelValidation modelValidation,
   }) {
     initialClick++;
-    if (initialClick % intervalClick == 0) {
-      switch (typeAds) {
+    if (initialClick % modelValidation.ads!.interval! == 0) {
+      switch (modelValidation.ads!.activeAds) {
         case "fan":
-          return FanController.fanInterstitial(
+          return FanService.fanInterstitial(
             context: context,
             typePush: 'pushreplace',
             nameRoutem: routeName,
-            placementId: placementId,
+            placementId: modelValidation.ads!.fan!.fanInterstitialId,
           );
         case "admob":
-          return AdmobController.interstitialAd(
+          return AdmobService.interstitialAd(
             context: context,
             typePush: 'pushreplace',
             nameRoutem: routeName,
-            unitIdInt: unitId!,
+            unitIdInt: modelValidation.ads!.admob!.admobInterstitialId!,
           );
         default:
       }
     } else {
-      Navigator.pushReplacementNamed(context, routeName);
+      Navigator.pushReplacementNamed(context, routeName,
+          arguments: ModelRoute(modelValidation: modelValidation));
     }
   }
 
   static back({
     required BuildContext context,
-    required int intervalClick,
-    required String typeAds,
-    String? unitId,
-    String? placementId,
+    required ModelValidation modelValidation,
   }) {
     initialClick++;
-    if (initialClick % intervalClick == 0) {
-      switch (typeAds) {
+    if (initialClick % modelValidation.ads!.interval! == 0) {
+      switch (modelValidation.ads!.activeAds) {
         case "fan":
-          return FanController.fanInterstitial(
+          return FanService.fanInterstitial(
             context: context,
             typePush: 'back',
+            placementId: modelValidation.ads!.fan!.fanInterstitialId,
           );
         case "admob":
-          return AdmobController.interstitialAd(
-              context: context, unitIdInt: unitId, typePush: 'back');
+          return AdmobService.interstitialAd(
+            context: context,
+            unitIdInt: modelValidation.ads!.admob!.admobInterstitialId!,
+            typePush: 'back',
+          );
         default:
       }
     } else {

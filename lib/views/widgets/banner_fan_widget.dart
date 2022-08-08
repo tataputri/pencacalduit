@@ -1,6 +1,6 @@
 import 'package:audience_network/ad/banner_ad.dart';
 import 'package:flutter/material.dart';
-import 'package:template_spam_playtore/controllers/fan_controller.dart';
+import 'package:template_spam_playtore/services/fan_service.dart';
 
 class CostumBannerFan extends StatelessWidget {
   final BannerSize? bannerSize;
@@ -9,6 +9,6 @@ class CostumBannerFan extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FanController.fanBanner();
+    return FanService.fanBanner();
   }
 }

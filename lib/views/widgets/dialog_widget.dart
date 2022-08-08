@@ -21,16 +21,14 @@ customDialog(BuildContext context,
           child: AlertDialog(
             title: Text(
               title!,
-              style: tspFontP.copyWith(fontWeight: FontWeight.bold),
+              style: xFontH3
             ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
                   content!,
-                  style: tspFontP.copyWith(
-                    fontSize: 14,
-                  ),
+                  style: xFontP
                 ),
                 const SizedBox(height: 10),
                 CustomCacheImg(
@@ -47,12 +45,12 @@ customDialog(BuildContext context,
                   Uri uri = Uri.parse(url!);
                   _launchURL(context, uri);
                 },
+                style: ElevatedButton.styleFrom(
+                  primary: xColorVariant,
+                ),
                 child: Text(
                   "Go",
-                  style: tspFontP.copyWith(color: tspColorThird),
-                ),
-                style: ElevatedButton.styleFrom(
-                  primary: tspColorPrime,
+                  style: xFontP
                 ),
               )
             ],

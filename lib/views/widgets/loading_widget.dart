@@ -14,7 +14,7 @@ class CustomLoading extends StatelessWidget {
       height:height?? 25,
       width: width ?? 25,
       child: CircularProgressIndicator(
-        color: color ?? tspColorPrime,
+        color: color ?? xColorVariant,
         strokeWidth: strokeWidth?? 3,
       ),
     );

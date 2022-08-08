@@ -2,32 +2,32 @@ import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:template_spam_playtore/constants/colors_style.dart';
 
-TextStyle tspFontH1 = GoogleFonts.openSans(
-  fontSize: 22,
-  color: tspColorMain,
-  fontWeight: FontWeight.w600,
-);
-
-TextStyle tspFontH2 = GoogleFonts.openSans(
+TextStyle xFontH1 = GoogleFonts.inter(
   fontSize: 20,
-  color: tspColorMain,
+  color: xColorMain,
+  fontWeight: FontWeight.bold,
+);
+
+TextStyle xFontH2 = GoogleFonts.inter(
+  fontSize: 18,
+  color: xColorMain,
   fontWeight: FontWeight.w600,
 );
 
-TextStyle tspFontH3 = GoogleFonts.roboto(
-  fontSize: 18,
-  color: tspColorMain,
-  fontWeight: FontWeight.w400,
-);
-
-TextStyle tspFontP = GoogleFonts.roboto(
+TextStyle xFontH3 = GoogleFonts.inter(
   fontSize: 16,
-  color: tspColorMain,
+  color: xColorSubMain,
   fontWeight: FontWeight.w400,
 );
 
-TextStyle tspFontSmall = GoogleFonts.roboto(
+TextStyle xFontP = GoogleFonts.inter(
   fontSize: 14,
-  color: tspColorMain,
-  fontWeight: FontWeight.w200,
+  color: xColorSubMain,
+  fontWeight: FontWeight.normal,
+);
+
+TextStyle xFontSmall = GoogleFonts.inter(
+  fontSize: 12,
+  color: xColorSubMain,
+  fontWeight: FontWeight.normal,
 );

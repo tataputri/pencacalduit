@@ -7,11 +7,11 @@ import 'package:template_spam_playtore/views/pages/validation_page/validation_pa
 class RouteGenerate {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case tspRouteValidation:
+      case xRouteVaValidation:
         return MaterialPageRoute(builder: (_) => const ValidationPage());
-      case tspRouteHome:
+      case xRouteHome:
         return MaterialPageRoute(builder: (_) => const HomePage());
-      case tspRouteDetail:
+      case xRouteDetail:
         return MaterialPageRoute(builder: (_) => const HomePage());
       default:
         return MaterialPageRoute(builder: (_) => const BlankPage());

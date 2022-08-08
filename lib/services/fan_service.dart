@@ -1,7 +1,9 @@
+// ignore_for_file: avoid_print
+
 import 'package:audience_network/audience_network.dart';
 import 'package:flutter/material.dart';
 
-class FanController {
+class FanService {
   static void get initFan {
     AudienceNetwork.init(testingId: '7ef5b822-bcb8-4b12-bb8d-23031a3f3e45');
   }

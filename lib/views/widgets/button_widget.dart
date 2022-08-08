@@ -19,7 +19,7 @@ class CustomButton extends StatelessWidget {
       child: child ??
           Text(
             "Submit",
-            style: tspFontP,
+            style: xFontP,
           ),
     );
   }

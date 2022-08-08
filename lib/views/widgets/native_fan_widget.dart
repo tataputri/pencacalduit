@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:template_spam_playtore/controllers/fan_controller.dart';
+import 'package:template_spam_playtore/services/fan_service.dart';
 
 class CostumNativeFan extends StatelessWidget {
   final String? placementId;
@@ -9,6 +9,6 @@ class CostumNativeFan extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FanController.fanNative(height: 60 , placementId: placementId );
+    return FanService.fanNative(height: 60 , placementId: placementId );
   }
 }

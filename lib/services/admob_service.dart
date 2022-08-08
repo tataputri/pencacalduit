@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-class AdmobController {
+class AdmobService {
   static late InterstitialAd intAd;
   static late BannerAd _bannerAd;
   static bool isBannerAdReady = false;
@@ -11,13 +11,13 @@ class AdmobController {
   }
 
   static Future<void> interstitialAd({
-    String? unitIdInt,
     required BuildContext context,
-    String? nameRoutem,
     required String typePush,
+    required String unitIdInt,
+    String? nameRoutem,
   }) async {
     InterstitialAd.load(
-      adUnitId: unitIdInt ?? 'ca-app-pub-3940256099942544/1033173712',
+      adUnitId: unitIdInt ,
       request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (ad) async {
