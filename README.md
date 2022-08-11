@@ -1,4 +1,4 @@
-# template_spam_playtore
+# firemax_football
 
 Template ini dibuat guna mempermudah membuat project flutter, karena didalam sudah tersedia package2 yang wajib digunakan untuk bermain di dunia playstore.
 

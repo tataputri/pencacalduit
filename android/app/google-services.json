@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "466941533628",
+    "project_id": "firemax-futebol",
+    "storage_bucket": "firemax-futebol.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:466941533628:android:e73805ea9cb75b02b8dfb9",
+        "android_client_info": {
+          "package_name": "com.firemaxfutebol.dahora.nop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "466941533628-5nbvuju03dhh46nv6vuaetbmak8r8cta.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7aADM7Q1zVs_E4tXeer7vixElGUEz-IE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "466941533628-5nbvuju03dhh46nv6vuaetbmak8r8cta.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

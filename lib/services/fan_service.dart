@@ -1,6 +1,9 @@
 // ignore_for_file: avoid_print
 
 import 'package:audience_network/audience_network.dart';
+import 'package:firemax_football/models/model_home.dart';
+import 'package:firemax_football/models/model_route.dart';
+import 'package:firemax_football/models/model_validation.dart';
 import 'package:flutter/material.dart';
 
 class FanService {
@@ -38,9 +41,13 @@ class FanService {
 
   static InterstitialAd fanInterstitial({
     required BuildContext context,
+    required String typePush,
     String? nameRoutem,
     String? placementId,
-    required String typePush,
+    ModelValidation? modelValidation,
+    int? index,
+    String? data1,
+    DataBola? data,
   }) {
     final interstitialAd =
         InterstitialAd(placementId ?? InterstitialAd.testPlacementId);
@@ -54,13 +61,15 @@ class FanService {
       onDisplayed: () {
         switch (typePush) {
           case 'push':
-            Navigator.pushNamed(context, nameRoutem!);
+            Navigator.pushNamed(context, nameRoutem!,
+                arguments: ModelRoute(modelValidation: modelValidation, index: index, data1: data1, data: data));
             break;
           case 'back':
             Navigator.pop(context);
             break;
           case 'pushreplace':
-            Navigator.pushReplacementNamed(context, nameRoutem!);
+            Navigator.pushReplacementNamed(context, nameRoutem!,
+                arguments: ModelRoute(modelValidation: modelValidation));
             break;
           default:
         }

@@ -1,4 +1,4 @@
-package com.example.template_spam_playtore
+package com.firemaxfutebol.dahora.nop
 
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine

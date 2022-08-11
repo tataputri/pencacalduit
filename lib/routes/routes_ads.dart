@@ -1,8 +1,9 @@
+import 'package:firemax_football/models/model_home.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:template_spam_playtore/services/admob_service.dart';
-import 'package:template_spam_playtore/services/fan_service.dart';
-import 'package:template_spam_playtore/models/model_route.dart';
-import 'package:template_spam_playtore/models/model_validation.dart';
+import 'package:firemax_football/services/admob_service.dart';
+import 'package:firemax_football/services/fan_service.dart';
+import 'package:firemax_football/models/model_route.dart';
+import 'package:firemax_football/models/model_validation.dart';
 
 class GoRoute {
   static int initialClick = 0;
@@ -11,6 +12,9 @@ class GoRoute {
     required BuildContext context,
     required String routeName,
     required ModelValidation modelValidation,
+    int? index,
+    String? data1,
+    DataBola? data,
   }) {
     initialClick++;
     if (initialClick % modelValidation.ads!.interval! == 0) {
@@ -21,7 +25,10 @@ class GoRoute {
             typePush: 'push',
             nameRoutem: routeName,
             placementId: modelValidation.ads!.fan!.fanInterstitialId,
-
+            modelValidation: modelValidation,
+            index: index,
+            data1: data1,
+            data: data,
           );
         case "admob":
           return AdmobService.interstitialAd(
@@ -29,12 +36,20 @@ class GoRoute {
             typePush: 'push',
             nameRoutem: routeName,
             unitIdInt: modelValidation.ads!.admob!.admobInterstitialId!,
+            modelValidation: modelValidation,
+            index: index,
+            data1: data1,
+            data: data
           );
         default:
       }
     } else {
       Navigator.pushNamed(context, routeName,
-          arguments: ModelRoute(modelValidation: modelValidation));
+          arguments: ModelRoute(
+              modelValidation: modelValidation,
+              index: index,
+              data1: data1,
+              data: data));
     }
   }
 
@@ -48,18 +63,18 @@ class GoRoute {
       switch (modelValidation.ads!.activeAds) {
         case "fan":
           return FanService.fanInterstitial(
-            context: context,
-            typePush: 'pushreplace',
-            nameRoutem: routeName,
-            placementId: modelValidation.ads!.fan!.fanInterstitialId,
-          );
+              context: context,
+              typePush: 'pushreplace',
+              nameRoutem: routeName,
+              placementId: modelValidation.ads!.fan!.fanInterstitialId,
+              modelValidation: modelValidation);
         case "admob":
           return AdmobService.interstitialAd(
-            context: context,
-            typePush: 'pushreplace',
-            nameRoutem: routeName,
-            unitIdInt: modelValidation.ads!.admob!.admobInterstitialId!,
-          );
+              context: context,
+              typePush: 'pushreplace',
+              nameRoutem: routeName,
+              unitIdInt: modelValidation.ads!.admob!.admobInterstitialId!,
+              modelValidation: modelValidation);
         default:
       }
     } else {
@@ -77,16 +92,16 @@ class GoRoute {
       switch (modelValidation.ads!.activeAds) {
         case "fan":
           return FanService.fanInterstitial(
-            context: context,
-            typePush: 'back',
-            placementId: modelValidation.ads!.fan!.fanInterstitialId,
-          );
+              context: context,
+              typePush: 'back',
+              placementId: modelValidation.ads!.fan!.fanInterstitialId,
+              modelValidation: modelValidation);
         case "admob":
           return AdmobService.interstitialAd(
-            context: context,
-            unitIdInt: modelValidation.ads!.admob!.admobInterstitialId!,
-            typePush: 'back',
-          );
+              context: context,
+              unitIdInt: modelValidation.ads!.admob!.admobInterstitialId!,
+              typePush: 'back',
+              modelValidation: modelValidation);
         default:
       }
     } else {

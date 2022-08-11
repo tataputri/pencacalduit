@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:template_spam_playtore/constants/colors_style.dart';
+import 'package:firemax_football/constants/colors_style.dart';
 
 TextStyle xFontH1 = GoogleFonts.inter(
   fontSize: 20,

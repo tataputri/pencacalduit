@@ -1,7 +1,11 @@
-import 'package:flutter/material.dart'; 
-import 'package:template_spam_playtore/dummy/listdummy.dart'; 
-import 'package:template_spam_playtore/views/widgets/cache_img_widget.dart';
-import 'package:template_spam_playtore/views/widgets/dialog_widget.dart'; 
+ 
+import 'package:firemax_football/bloc/validation/validation_bloc.dart';
+import 'package:firemax_football/constants/colors_style.dart';
+import 'package:firemax_football/routes/route_constant.dart';
+import 'package:firemax_football/routes/routes_ads.dart';
+import 'package:firemax_football/views/widgets/loading_widget.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ValidationPage extends StatefulWidget {
   const ValidationPage({Key? key}) : super(key: key);
@@ -11,26 +15,43 @@ class ValidationPage extends StatefulWidget {
 }
 
 class _ValidationPageState extends State<ValidationPage> {
-  DataDummy? dataDummy;
+  late ValidationBloc bloc;
 
   @override
   void initState() {
-    dataDummy = DataDummy();
-    dataDummy!.genereateListDummy();
+    bloc = BlocProvider.of(context);
+    bloc.add(LoadValidation());
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return   Scaffold(
-      body: Center(
-          child: InkWell(
-            onTap: () => customDialog(context, title: "Labore fugiat nisi nulla laboris voluptate ad.", content: "Labore dolor ad esse eiusmod elit do proident Lorem. Occaecat anim aute eu laboris cupidatat irure proident quis quis sunt officia minim id. Aute pariatur nulla occaecat eiusmod dolore in in occaecat ipsum nulla proident.", img: "https://images.pexels.com/photos/12823102/pexels-photo-12823102.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"),
-            child:const CustomCacheImg(
-                  url:
-              'https://images.pexels.com/photos/12823102/pexels-photo-12823102.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    return Scaffold(
+        backgroundColor: xColorSubVariant,
+        body: BlocConsumer<ValidationBloc, ValidationState>(
+          listener: (context, state) {
+            if (state is ValidationLoaded) {
+              GoRoute.pushReplace(
+                  context: context,
+                  routeName: xRouteHome,
+                  modelValidation: state.modelValidation);
+            }
+          },
+          builder: (context, state) {
+            if (state is ValidationWaiting) {
+              return const Center(
+                child: CustomLoading(
+                  color:xColorSubMain,
+                  width: 30,
+                  height: 30,
                 ),
-          )),
-    );
+              );
+            }
+            if (state is ValidationLoaded) {
+              return Container();
+            }
+            return Container();
+          },
+        ));
   }
 }

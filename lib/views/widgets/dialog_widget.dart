@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:template_spam_playtore/constants/colors_style.dart';
-import 'package:template_spam_playtore/constants/fonts_style.dart';
-import 'package:template_spam_playtore/views/widgets/cache_img_widget.dart';
+import 'package:firemax_football/constants/colors_style.dart';
+import 'package:firemax_football/constants/fonts_style.dart';
+import 'package:firemax_football/views/widgets/cache_img_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 _launchURL(BuildContext context, Uri url) async {

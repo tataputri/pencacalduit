@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:template_spam_playtore/services/fan_service.dart';
+import 'package:firemax_football/services/fan_service.dart';
 
 class CostumNativeFan extends StatelessWidget {
   final String? placementId;

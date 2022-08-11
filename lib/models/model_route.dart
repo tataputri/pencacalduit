@@ -1,7 +1,10 @@
-import 'package:template_spam_playtore/models/model_validation.dart';
+import 'package:firemax_football/models/model_home.dart';
+import 'package:firemax_football/models/model_validation.dart';
 
 class ModelRoute {
   final String? data1;
+  final int? index;
   final ModelValidation? modelValidation;
-  ModelRoute({this.modelValidation, this.data1});
+  final DataBola? data;
+  ModelRoute({this.index, this.modelValidation, this.data1, this.data});
 }

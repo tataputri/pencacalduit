@@ -1,3 +1,6 @@
+import 'package:firemax_football/models/model_home.dart';
+import 'package:firemax_football/models/model_route.dart';
+import 'package:firemax_football/models/model_validation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
@@ -14,10 +17,14 @@ class AdmobService {
     required BuildContext context,
     required String typePush,
     required String unitIdInt,
+    ModelValidation? modelValidation,
     String? nameRoutem,
+    int? index,
+    String? data1,
+    DataBola? data,
   }) async {
     InterstitialAd.load(
-      adUnitId: unitIdInt ,
+      adUnitId: unitIdInt,
       request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (ad) async {
@@ -29,13 +36,15 @@ class AdmobService {
             debugPrint('MUNCUL INT FULL SCREEN');
             switch (typePush) {
               case 'push':
-                Navigator.pushNamed(context, nameRoutem!);
+                Navigator.pushNamed(context, nameRoutem!,
+                    arguments: ModelRoute(modelValidation: modelValidation,index: index, data1: data1, data: data));
                 break;
               case 'back':
                 Navigator.pop(context);
                 break;
               case 'pushreplace':
-                Navigator.pushReplacementNamed(context, nameRoutem!);
+                Navigator.pushReplacementNamed(context, nameRoutem!,
+                    arguments: ModelRoute(modelValidation: modelValidation));
                 break;
               default:
             }

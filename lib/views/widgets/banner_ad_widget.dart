@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:template_spam_playtore/services/admob_service.dart';
+import 'package:firemax_football/services/admob_service.dart';
 
 class CostumBannerAdmob extends StatelessWidget {
   final String unitId;

@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:template_spam_playtore/views/widgets/loading_widget.dart';
+import 'package:firemax_football/views/widgets/loading_widget.dart';
 
 class CustomCacheImg extends StatelessWidget {
   final String url;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:template_spam_playtore/constants/colors_style.dart';
+import 'package:firemax_football/constants/colors_style.dart';
 
 class CustomLoading extends StatelessWidget {
   final Color? color;

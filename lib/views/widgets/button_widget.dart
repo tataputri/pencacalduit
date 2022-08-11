@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:template_spam_playtore/constants/fonts_style.dart';
+import 'package:firemax_football/constants/fonts_style.dart';
 
 class CustomButton extends StatelessWidget {
   final Widget? child;
