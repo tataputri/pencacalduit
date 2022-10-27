@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:firemax_football/constants/colors_style.dart';
+import 'package:firemax_football/constants/constant.dart';
+import 'package:flutter/material.dart'; 
 
 class CustomLoading extends StatelessWidget {
   final Color? color;
@@ -14,7 +14,7 @@ class CustomLoading extends StatelessWidget {
       height:height?? 25,
       width: width ?? 25,
       child: CircularProgressIndicator(
-        color: color ?? xColorVariant,
+        color: color ?? Constant.xColorAccents,
         strokeWidth: strokeWidth?? 3,
       ),
     );

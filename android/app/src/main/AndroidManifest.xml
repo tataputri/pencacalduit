@@ -2,7 +2,7 @@
     package="com.firemaxfutebol.dahora.nop">
    <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="Firemax Futebol"
+        android:label="Firemax TV"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity
@@ -34,5 +34,8 @@
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713"/>
+        <meta-data 
+           android:name="applovin.sdk.key"
+           android:value="exEMohPo0fCzgZa-ZZHXUpyhz4OSztd5EonoyRahwwB_CF255nlBtb5wyad0o3-ebFq2cNbuIR3EkkHymNvF0Q"/>
     </application>
 </manifest>

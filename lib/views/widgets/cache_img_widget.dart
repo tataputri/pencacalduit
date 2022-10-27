@@ -18,8 +18,14 @@ class CustomCacheImg extends StatelessWidget {
       height: height,
       fit: fit,
       imageUrl: url,
-      placeholder: (context, url) => const CustomLoading(),
-      errorWidget: (context, url, error) => const Icon(Icons.error),
+      placeholder: (context, url) {
+        return const Center(
+          child: CustomLoading(),
+        );
+      },
+      errorWidget: (context, url, error) => const Icon(
+        Icons.error,
+      ),
     );
   }
 }

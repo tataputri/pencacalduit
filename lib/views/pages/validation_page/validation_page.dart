@@ -1,7 +1,5 @@
- 
-import 'package:firemax_football/bloc/validation/validation_bloc.dart';
-import 'package:firemax_football/constants/colors_style.dart';
-import 'package:firemax_football/routes/route_constant.dart';
+import 'package:firemax_football/bloc/validation/validation_bloc.dart'; 
+import 'package:firemax_football/constants/constant.dart';
 import 'package:firemax_football/routes/routes_ads.dart';
 import 'package:firemax_football/views/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
@@ -27,21 +25,28 @@ class _ValidationPageState extends State<ValidationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: xColorSubVariant,
+        backgroundColor: Constant.xColorDark,
         body: BlocConsumer<ValidationBloc, ValidationState>(
           listener: (context, state) {
             if (state is ValidationLoaded) {
-              GoRoute.pushReplace(
-                  context: context,
-                  routeName: xRouteHome,
-                  modelValidation: state.modelValidation);
+              if (state.modelValidation.systemApp!.status == false) {
+                GoRoute.pushReplace(
+                    context: context,
+                    routeName: Constant.xScreenDash,
+                    modelValidation: state.modelValidation);
+              } else {
+                GoRoute.pushReplace(
+                    context: context,
+                    routeName: Constant.xScreenBlokir,
+                    modelValidation: state.modelValidation);
+              }
             }
           },
           builder: (context, state) {
             if (state is ValidationWaiting) {
               return const Center(
                 child: CustomLoading(
-                  color:xColorSubMain,
+                  color: Constant.xColorAccents,
                   width: 30,
                   height: 30,
                 ),

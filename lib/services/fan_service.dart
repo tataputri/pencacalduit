@@ -1,9 +1,12 @@
 // ignore_for_file: avoid_print
 
 import 'package:audience_network/audience_network.dart';
+import 'package:firemax_football/models/detail.dart';
+import 'package:firemax_football/models/match.dart';
 import 'package:firemax_football/models/model_home.dart';
 import 'package:firemax_football/models/model_route.dart';
 import 'package:firemax_football/models/model_validation.dart';
+import 'package:firemax_football/models/today.dart';
 import 'package:flutter/material.dart';
 
 class FanService {
@@ -13,7 +16,7 @@ class FanService {
 
   static NativeAd fanNative({String? placementId, required double height}) {
     return NativeAd(
-      placementId: placementId ?? NativeAd.testPlacementId,
+      placementId: placementId!,
       adType: NativeAdType.NATIVE_BANNER_AD,
       width: double.infinity,
       height: height,
@@ -30,9 +33,16 @@ class FanService {
       expandAnimationDuraion:
           300, //in milliseconds. Expands the adview with animation when ad is loaded
       listener: NativeAdListener(
-        onError: (code, message) => print(message),
-        onLoaded: () => print('loaded'),
-        onClicked: () => print('clicked'),
+        onError: (code, message) {
+          print(message);
+          print("FAN NATIVE ERROR");
+        },
+        onLoaded: () {
+          print("FAN NATIVE LOADED");
+        },
+        onClicked: () {
+          print("FAN NATIVE ONCLICK");
+        },
         onLoggingImpression: () => print('logging impression'),
         onMediaDownloaded: () => print('media downloaded'),
       ),
@@ -48,6 +58,10 @@ class FanService {
     int? index,
     String? data1,
     DataBola? data,
+    List<ModelMatch>? listMatch,
+    ModelMatch? modelMatch,
+    ModelToday? modelToday,
+    ModelDetail? modelDetail,
   }) {
     final interstitialAd =
         InterstitialAd(placementId ?? InterstitialAd.testPlacementId);
@@ -62,7 +76,16 @@ class FanService {
         switch (typePush) {
           case 'push':
             Navigator.pushNamed(context, nameRoutem!,
-                arguments: ModelRoute(modelValidation: modelValidation, index: index, data1: data1, data: data));
+                arguments: ModelRoute(
+                  modelValidation: modelValidation,
+                  index: index,
+                  data1: data1,
+                  data: data,
+                  listMatch: listMatch,
+                  modelMatch: modelMatch,
+                  modelToday: modelToday,
+                  modelDetail: modelDetail,
+                ));
             break;
           case 'back':
             Navigator.pop(context);

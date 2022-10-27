@@ -1,55 +1,68 @@
-import 'package:firemax_football/views/pages/all_liga_page/all_liga_page.dart';
+import 'package:firemax_football/constants/constant.dart'; 
+import 'package:firemax_football/models/model_route.dart';
 import 'package:firemax_football/views/pages/all_live_page/all_live_page.dart';
 import 'package:firemax_football/views/pages/all_match_page/all_match_page.dart';
-import 'package:firemax_football/views/pages/play_page/play_page.dart';
+import 'package:firemax_football/views/pages/blokir/blokir_page.dart';
+import 'package:firemax_football/views/pages/dashboard/dashboard.dart';
+import 'package:firemax_football/views/pages/liga/details/detail_liga.dart';
+import 'package:firemax_football/views/pages/detail_page/detail_page.dart';
+import 'package:firemax_football/views/pages/player/exo_player.dart';
 import 'package:firemax_football/views/pages/search_page/search_page.dart';
 import 'package:flutter/material.dart';
-import 'package:firemax_football/routes/route_constant.dart';
 import 'package:firemax_football/views/pages/blank_page/blank_page.dart';
-import 'package:firemax_football/views/pages/home_page/home_page.dart';
 import 'package:firemax_football/views/pages/validation_page/validation_page.dart';
+
+import '../views/pages/player/embed_player.dart';
 
 class RouteGenerate {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case xRouteVaValidation:
+      case Constant.xScreenRoot:
         return MaterialPageRoute(builder: (_) => const ValidationPage());
-      case xRouteHome:
-        var arg = settings.arguments as dynamic;
+      case Constant.xScreenBlokir:
+        return MaterialPageRoute(builder: (_) => const BlokirPage());
+      case Constant.xScreenDash:
+        var arg = settings.arguments as ModelRoute;
         return MaterialPageRoute(
-            builder: (_) => HomePage(
-                  modelRoute: arg,
+            builder: (_) => Dashboard(
+                  modelValidation: arg.modelValidation,
                 ));
-      case xRouteSearch:
-        var arg = settings.arguments as dynamic;
+      case Constant.xScreenSearch:
+        return MaterialPageRoute(builder: (_) => const SearchPage());
+      case Constant.xScreenDetailLiga:
+        var arg = settings.arguments as ModelRoute;
         return MaterialPageRoute(
-            builder: (_) => SearchPage(
-                  modelRoute: arg,
-                ));
-      case xRouteALlLive:
-        var arg = settings.arguments as dynamic;
+            builder: (_) => DetailLiga(match: arg.listMatch!));
+      case Constant.xScreenALlLive:
+        var arg = settings.arguments as ModelRoute;
         return MaterialPageRoute(
             builder: (_) => AllLivePage(
-                  modelRoute: arg,
+                  items: arg.listMatch,
                 ));
-      case xRouteALlLiga:
-        var arg = settings.arguments as dynamic;
-        return MaterialPageRoute(
-            builder: (_) => AllLigaPage(
-                  modelRoute: arg,
-                ));
-      case xRouteALlMatch:
+      // case Constant.xScreenALlLiga:
+      //   var arg = settings.arguments as dynamic;
+      //   return MaterialPageRoute(
+      //       builder: (_) => AllLigaPage(
+      //             modelRoute: arg,
+      //           ));
+      case Constant.xScreenALlMatch:
         var arg = settings.arguments as dynamic;
         return MaterialPageRoute(
             builder: (_) => AllMatchPage(
                   modelRoute: arg,
                 ));
-      case xRoutePlay:
-        var arg = settings.arguments as dynamic;
+      case Constant.xScreenDetail:
+        var arg = settings.arguments as ModelRoute;
         return MaterialPageRoute(
-            builder: (_) => PlayPage(
-                  modelRoute: arg,
-                ));
+            builder: (_) => DetailPage(modelMatch: arg.modelMatch));
+      case Constant.xScreenExoPlayer:
+        var arg = settings.arguments as ModelRoute;
+        return MaterialPageRoute(
+            builder: (_) => ExoPlayer(modelDetail: arg.modelDetail!));
+      case Constant.xScreenEmbedPLayer:
+        var arg = settings.arguments as ModelRoute;
+        return MaterialPageRoute(
+            builder: (_) => EmbedPLayer(modelDetail: arg.modelDetail!));
       default:
         return MaterialPageRoute(builder: (_) => const BlankPage());
     }

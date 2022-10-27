@@ -1,8 +1,12 @@
+import 'package:firemax_football/models/match.dart';
 import 'package:firemax_football/models/model_home.dart';
 import 'package:firemax_football/models/model_route.dart';
 import 'package:firemax_football/models/model_validation.dart';
+import 'package:firemax_football/models/today.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+
+import '../models/detail.dart';
 
 class AdmobService {
   static late InterstitialAd intAd;
@@ -22,6 +26,10 @@ class AdmobService {
     int? index,
     String? data1,
     DataBola? data,
+    List<ModelMatch>? listMatch,
+    ModelMatch? modelMatch,
+    ModelToday? modelToday,
+    ModelDetail? modelDetail,
   }) async {
     InterstitialAd.load(
       adUnitId: unitIdInt,
@@ -37,7 +45,16 @@ class AdmobService {
             switch (typePush) {
               case 'push':
                 Navigator.pushNamed(context, nameRoutem!,
-                    arguments: ModelRoute(modelValidation: modelValidation,index: index, data1: data1, data: data));
+                    arguments: ModelRoute(
+                      modelValidation: modelValidation,
+                      index: index,
+                      data1: data1,
+                      data: data,
+                      listMatch: listMatch,
+                      modelMatch: modelMatch,
+                      modelToday: modelToday,
+                      modelDetail: modelDetail,
+                    ));
                 break;
               case 'back':
                 Navigator.pop(context);

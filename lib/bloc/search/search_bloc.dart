@@ -1,5 +1,5 @@
-import 'package:bloc/bloc.dart';
-import 'package:firemax_football/models/model_home.dart';
+import 'package:bloc/bloc.dart'; 
+import 'package:firemax_football/models/search.dart';
 import 'package:firemax_football/network/api_repository.dart';
 import 'package:flutter/material.dart';
 
@@ -12,12 +12,14 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       emit(SearchWaiting());
       ApiRepository apiRepository = ApiRepository();
 
-      final data = await apiRepository.getSearch(event.keyword!);
-       
-      if (data!.data!.isEmpty) {
+      final data = await apiRepository.getSearch(event.keyword, event.page);
+
+      if (data == null) {
         emit(SearchError());
+      } else if (data.result!.isEmpty) {
+        emit(SearchNull());
       } else {
-        emit(SearchLoaded(dataSearch: data.data));
+        emit(SearchLoaded(dataSearch: data));
       }
     });
   }

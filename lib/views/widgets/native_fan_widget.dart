@@ -9,6 +9,7 @@ class CostumNativeFan extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FanService.fanNative(height: 60 , placementId: placementId );
+    
+    return FanService.fanNative(height: 60, placementId: placementId);
   }
 }

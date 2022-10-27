@@ -1,233 +1,186 @@
 class ModelValidation {
-  String? check;
-  Ads? ads;
-  RestApi? restApi;
-  SystemApp? systemApp;
+  bool? isOpen;
+  Ad? ad;
   SystemAds? systemAds;
+  SystemAds? systemApp;
 
-  ModelValidation(
-      {this.check, this.ads, this.restApi, this.systemApp, this.systemAds});
+  ModelValidation({this.isOpen, this.ad, this.systemAds, this.systemApp});
 
   ModelValidation.fromJson(Map<String, dynamic> json) {
-    check = json['check'];
-    ads = json['ads'] != null ? Ads.fromJson(json['ads']) : null;
-    restApi = json['rest_api'] != null
-        ? RestApi.fromJson(json['rest_api'])
-        : null;
-    systemApp = json['system_app'] != null
-        ? SystemApp.fromJson(json['system_app'])
-        : null;
+    isOpen = json['isOpen'];
+    ad = json['ad'] != null ? Ad.fromJson(json['ad']) : null;
     systemAds = json['system_ads'] != null
         ? SystemAds.fromJson(json['system_ads'])
+        : null;
+    systemApp = json['system_app'] != null
+        ? SystemAds.fromJson(json['system_app'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['check'] = check;
-    if (ads != null) {
-      data['ads'] = ads!.toJson();
-    }
-    if (restApi != null) {
-      data['rest_api'] = restApi!.toJson();
-    }
-    if (systemApp != null) {
-      data['system_app'] = systemApp!.toJson();
+    data['isOpen'] = isOpen;
+    if (ad != null) {
+      data['ad'] = ad!.toJson();
     }
     if (systemAds != null) {
       data['system_ads'] = systemAds!.toJson();
+    }
+    if (systemApp != null) {
+      data['system_app'] = systemApp!.toJson();
     }
     return data;
   }
 }
 
-class Ads {
-  String? activeAds;
-  int? interval;
+class Ad {
+  String? adActive;
+  int? adInterval;
   Admob? admob;
-  Fan? fan;
+  Admob? fan;
+  Applovin? applovin;
 
-  Ads({this.activeAds, this.interval, this.admob, this.fan});
+  Ad({this.adActive, this.adInterval, this.admob, this.fan, this.applovin});
 
-  Ads.fromJson(Map<String, dynamic> json) {
-    activeAds = json['active_ads'];
-    interval = json['interval'];
+  Ad.fromJson(Map<String, dynamic> json) {
+    adActive = json['ad_active'];
+    adInterval = json['ad_interval'];
     admob = json['admob'] != null ? Admob.fromJson(json['admob']) : null;
-    fan = json['fan'] != null ? Fan.fromJson(json['fan']) : null;
+    fan = json['fan'] != null ? Admob.fromJson(json['fan']) : null;
+    applovin = json['applovin'] != null
+        ? Applovin.fromJson(json['applovin'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['active_ads'] = activeAds;
-    data['interval'] = interval;
+    data['ad_active'] = adActive;
+    data['ad_interval'] = adInterval;
     if (admob != null) {
       data['admob'] = admob!.toJson();
     }
     if (fan != null) {
       data['fan'] = fan!.toJson();
     }
+    if (applovin != null) {
+      data['applovin'] = applovin!.toJson();
+    }
     return data;
   }
 }
 
 class Admob {
-  String? admobBannerId;
-  String? admobInterstitialId;
-  String? admobNative;
+  Banner? banner;
+  Banner? interstitial;
+  Banner? native;
 
-  Admob({this.admobBannerId, this.admobInterstitialId, this.admobNative});
+  Admob({this.banner, this.interstitial, this.native});
 
   Admob.fromJson(Map<String, dynamic> json) {
-    admobBannerId = json['admob_banner_id'];
-    admobInterstitialId = json['admob_interstitial_id'];
-    admobNative = json['admob_native'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['admob_banner_id'] = admobBannerId;
-    data['admob_interstitial_id'] = admobInterstitialId;
-    data['admob_native'] = admobNative;
-    return data;
-  }
-}
-
-class Fan {
-  String? fanBannerId;
-  String? fanInterstitialId;
-  String? fanNativeId;
-
-  Fan({this.fanBannerId, this.fanInterstitialId, this.fanNativeId});
-
-  Fan.fromJson(Map<String, dynamic> json) {
-    fanBannerId = json['fan_banner_id'];
-    fanInterstitialId = json['fan_interstitial_id'];
-    fanNativeId = json['fan_native_id'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['fan_banner_id'] = fanBannerId;
-    data['fan_interstitial_id'] = fanInterstitialId;
-    data['fan_native_id'] = fanNativeId;
-    return data;
-  }
-}
-
-class RestApi {
-  String? baseUrl;
-  String? xRapidapiHost;
-  String? xRapidapiKey;
-  String? endpointVideoInfo;
-  String? endpointRegionList;
-  String? endpointVideoByRegion;
-  String? endpointSearchChallenge;
-  String? endpointVideoBySearchChallenge;
-
-  RestApi(
-      {this.baseUrl,
-      this.xRapidapiHost,
-      this.xRapidapiKey,
-      this.endpointVideoInfo,
-      this.endpointRegionList,
-      this.endpointVideoByRegion,
-      this.endpointSearchChallenge,
-      this.endpointVideoBySearchChallenge});
-
-  RestApi.fromJson(Map<String, dynamic> json) {
-    baseUrl = json['base_url'];
-    xRapidapiHost = json['x_rapidapi_host'];
-    xRapidapiKey = json['x_rapidapi_key'];
-    endpointVideoInfo = json['endpoint_video_info'];
-    endpointRegionList = json['endpoint_region_list'];
-    endpointVideoByRegion = json['endpoint_video_by_region'];
-    endpointSearchChallenge = json['endpoint_search_challenge'];
-    endpointVideoBySearchChallenge = json['endpoint_video_by_search_challenge'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['base_url'] = baseUrl;
-    data['x_rapidapi_host'] = xRapidapiHost;
-    data['x_rapidapi_key'] = xRapidapiKey;
-    data['endpoint_video_info'] = endpointVideoInfo;
-    data['endpoint_region_list'] = endpointRegionList;
-    data['endpoint_video_by_region'] = endpointVideoByRegion;
-    data['endpoint_search_challenge'] = endpointSearchChallenge;
-    data['endpoint_video_by_search_challenge'] =
-        endpointVideoBySearchChallenge;
-    return data;
-  }
-}
-
-class SystemApp {
-  bool? statusSystemApp;
-  InfoRedirectSystemApp? infoRedirectSystemApp;
-
-  SystemApp({this.statusSystemApp, this.infoRedirectSystemApp});
-
-  SystemApp.fromJson(Map<String, dynamic> json) {
-    statusSystemApp = json['status_system_app'];
-    infoRedirectSystemApp = json['info_redirect_system_app'] != null
-        ? InfoRedirectSystemApp.fromJson(json['info_redirect_system_app'])
+    banner =
+        json['banner'] != null ? Banner.fromJson(json['banner']) : null;
+    interstitial = json['interstitial'] != null
+        ? Banner.fromJson(json['interstitial'])
         : null;
+    native =
+        json['native'] != null ? Banner.fromJson(json['native']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['status_system_app'] = statusSystemApp;
-    if (infoRedirectSystemApp != null) {
-      data['info_redirect_system_app'] = infoRedirectSystemApp!.toJson();
+    if (banner != null) {
+      data['banner'] = banner!.toJson();
+    }
+    if (interstitial != null) {
+      data['interstitial'] = interstitial!.toJson();
+    }
+    if (native != null) {
+      data['native'] = native!.toJson();
     }
     return data;
   }
 }
 
-class InfoRedirectSystemApp {
-  String? title;
-  String? imageurl;
-  String? content;
-  String? urlredirect;
+class Banner {
+  bool? status;
+  String? adUnit;
 
-  InfoRedirectSystemApp(
-      {this.title, this.imageurl, this.content, this.urlredirect});
+  Banner({this.status, this.adUnit});
 
-  InfoRedirectSystemApp.fromJson(Map<String, dynamic> json) {
-    title = json['title'];
-    imageurl = json['imageurl'];
-    content = json['content'];
-    urlredirect = json['urlredirect'];
+  Banner.fromJson(Map<String, dynamic> json) {
+    status = json['status'];
+    adUnit = json['ad_unit'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['title'] = title;
-    data['imageurl'] = imageurl;
-    data['content'] = content;
-    data['urlredirect'] = urlredirect;
+    data['status'] = status;
+    data['ad_unit'] = adUnit;
+    return data;
+  }
+}
+
+class Applovin {
+  Banner? banner;
+  Banner? interstitial;
+  Banner? native;
+  Banner? mrec;
+
+  Applovin({this.banner, this.interstitial, this.native, this.mrec});
+
+  Applovin.fromJson(Map<String, dynamic> json) {
+    banner =
+        json['banner'] != null ? Banner.fromJson(json['banner']) : null;
+    interstitial = json['interstitial'] != null
+        ? Banner.fromJson(json['interstitial'])
+        : null;
+    native =
+        json['native'] != null ? Banner.fromJson(json['native']) : null;
+    mrec = json['mrec'] != null ? Banner.fromJson(json['mrec']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (banner != null) {
+      data['banner'] = banner!.toJson();
+    }
+    if (interstitial != null) {
+      data['interstitial'] = interstitial!.toJson();
+    }
+    if (native != null) {
+      data['native'] = native!.toJson();
+    }
+    if (mrec != null) {
+      data['mrec'] = mrec!.toJson();
+    }
     return data;
   }
 }
 
 class SystemAds {
-  bool? statusSystemAds;
-  InfoRedirectSystemApp? infoRedirectSystemAds;
+  bool? status;
+  String? title;
+  String? content;
+  String? image;
+  String? url;
 
-  SystemAds({this.statusSystemAds, this.infoRedirectSystemAds});
+  SystemAds({this.status, this.title, this.content, this.image, this.url});
 
   SystemAds.fromJson(Map<String, dynamic> json) {
-    statusSystemAds = json['status_system_ads'];
-    infoRedirectSystemAds = json['info_redirect_system_ads'] != null
-        ? InfoRedirectSystemApp.fromJson(json['info_redirect_system_ads'])
-        : null;
+    status = json['status'];
+    title = json['title'];
+    content = json['content'];
+    image = json['image'];
+    url = json['url'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['status_system_ads'] = statusSystemAds;
-    if (infoRedirectSystemAds != null) {
-      data['info_redirect_system_ads'] = infoRedirectSystemAds!.toJson();
-    }
+    data['status'] = status;
+    data['title'] = title;
+    data['content'] = content;
+    data['image'] = image;
+    data['url'] = url;
     return data;
   }
 }

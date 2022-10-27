@@ -4,7 +4,8 @@ part of 'search_bloc.dart';
 abstract class SearchEvent {}
 
 class LoadSearch extends SearchEvent {
-  final String? keyword;
+  final String keyword;
+  final String page;
 
-  LoadSearch(this.keyword);
+  LoadSearch({required this.page, required this.keyword});
 }

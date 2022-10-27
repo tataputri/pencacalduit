@@ -9,8 +9,10 @@ class SearchWaiting extends SearchState {}
 
 class SearchError extends SearchState {}
 
+class SearchNull extends SearchState {}
+
 class SearchLoaded extends SearchState {
-  final List<DataBola>? dataSearch;
+  final ModelSearch? dataSearch;
 
   SearchLoaded({this.dataSearch});
 }

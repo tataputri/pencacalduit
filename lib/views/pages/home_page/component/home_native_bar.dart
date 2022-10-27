@@ -12,11 +12,11 @@ Widget homeNativeBar() {
     child: BlocBuilder<ValidationBloc, ValidationState>(
       builder: (context, state) {
         if (state is ValidationLoaded) {
-          if (state.modelValidation.ads!.activeAds! == "admob") {
+          if (state.modelValidation.ad!.adActive == "admob") {
             return CustomCardGlassEffect(
               width: xWidth(context),
               child: CostumNativeAdmob(
-                unitId: state.modelValidation.ads!.admob!.admobNative!,
+                unitId: state.modelValidation.ad!.admob!.native!.adUnit!,
                 height: 70,
               ),
             );
@@ -25,7 +25,7 @@ Widget homeNativeBar() {
                 width: xWidth(context),
                 child: CostumNativeFan(
                   height: 70,
-                  placementId: state.modelValidation.ads!.fan!.fanNativeId,
+                  placementId: state.modelValidation.ad!.fan!.native!.adUnit!,
                 ));
           }
         }

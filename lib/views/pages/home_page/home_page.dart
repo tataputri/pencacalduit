@@ -1,17 +1,15 @@
-import 'package:firemax_football/bloc/home/home_bloc.dart';
-import 'package:firemax_football/constants/colors_style.dart';
+import 'package:firemax_football/bloc/live/live_bloc.dart';
+import 'package:firemax_football/bloc/today/today_bloc.dart';
+import 'package:firemax_football/bloc/validation/validation_bloc.dart';
+import 'package:firemax_football/constants/constant.dart';
 import 'package:firemax_football/models/model_route.dart';
+import 'package:firemax_football/routes/routes_ads.dart';
 import 'package:firemax_football/services/rating_service.dart';
-import 'package:firemax_football/views/pages/home_page/component/clip_background.dart';
-import 'package:firemax_football/views/pages/home_page/component/home_allMatch_bar.dart';
+import 'package:firemax_football/views/pages/home_page/component/home_allmatch_bar.dart';
 import 'package:firemax_football/views/pages/home_page/component/home_header_bar.dart';
-import 'package:firemax_football/views/pages/home_page/component/home_liga_bar.dart';
 import 'package:firemax_football/views/pages/home_page/component/home_live_bar.dart';
-import 'package:firemax_football/views/pages/home_page/component/home_native_bar.dart';
-import 'package:firemax_football/views/pages/home_page/component/home_search_bar.dart';
-import 'package:firemax_football/views/widgets/dialog_widget.dart';
+import 'package:firemax_football/views/widgets/costum_show_native_ads_semua.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -24,62 +22,77 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late HomeBloc homeBloc;
+  late TodayBloc todayBloc;
+  late LiveBloc liveBloc;
   final RatingService _ratingService = RatingService();
 
   @override
   void initState() {
     super.initState();
-    homeBloc = BlocProvider.of(context);
-    homeBloc.add(LoadHome());
+    todayBloc = BlocProvider.of<TodayBloc>(context);
+    liveBloc = BlocProvider.of<LiveBloc>(context);
+    todayBloc.add(LoadToday(1));
+    liveBloc.add(LoadLive());
     getIntValuesSF();
-     if (widget.modelRoute!.modelValidation!.systemApp!.statusSystemApp == true) {
-      SchedulerBinding.instance.addPostFrameCallback((_) {
-        customDialog(context,
-            title: widget.modelRoute!.modelValidation!.systemApp!.infoRedirectSystemApp!.title,
-            content: widget.modelRoute!.modelValidation!.systemApp!
-                .infoRedirectSystemApp!.content,
-            img: widget.modelRoute!.modelValidation!.systemApp!
-                .infoRedirectSystemApp!.imageurl,
-            url: widget.modelRoute!.modelValidation!.systemApp!
-                .infoRedirectSystemApp!.urlredirect);
-      });
-    }
   }
 
   Future refreshHome() async {
-    homeBloc.add(LoadHome());
+    todayBloc.add(LoadToday(1));
+    liveBloc.add(LoadLive());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: xColorSubPrimary,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        titleSpacing: 12,
+        title: homeHeaderBar(context),
+        actions: [
+          BlocBuilder<ValidationBloc, ValidationState>(
+            builder: (context, state) {
+              if (state is ValidationLoaded) {
+                return IconButton(
+                  icon: const Icon(Icons.search),
+                  onPressed: () {
+                    GoRoute.push(
+                      context: context,
+                      routeName: Constant.xScreenSearch,
+                      modelValidation: state.modelValidation,
+                    );
+                  },
+                );
+              }
+              return Container();
+            },
+          )
+        ],
+      ),
       body: RefreshIndicator(
         onRefresh: refreshHome,
-        color: xColorSubMain,
-        child: Stack(
-          children: [
-            homeClipBg(context),
-            SafeArea(
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    homeHeaderBar(),
-                    homeSearchBar(context),
-                    homeLiveBar(context),
-                    homeNativeBar(),
-                    homeLigaBar(),
-                    homeNativeBar(),
-                    homeAllMatchBar(),
-                  ],
-                ),
-              ),
+        color: Constant.xColorAccents,
+        child: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // homeSearchBar(context),
+                // homeNativeBar(),
+                // const CostumShowNativeAdsSemua(),
+                // homeLigaBar(),
+                // const CostumShowNativeAdsSemua(),
+                // homeNativeBar(),
+                homeLiveBar(context), 
+                const CostumShowNativeAdsSemua(),
+                const SizedBox(height: 10),
+                homeAllMatchBar(context),
+              ],
             ),
-          ],
+          ),
         ),
       ),
+     
     );
   }
 

@@ -1,55 +1,127 @@
 import 'package:dio/dio.dart';
-import 'package:firemax_football/models/model_home.dart';
+import 'package:firemax_football/models/channel.dart';
+import 'package:firemax_football/models/jadwal.dart';
+import 'package:firemax_football/models/live.dart';
 import 'package:firemax_football/models/model_validation.dart';
-import 'package:flutter/material.dart';
+import 'package:firemax_football/models/score.dart';
+import 'package:firemax_football/models/search.dart';
+import 'package:firemax_football/models/today.dart';
+import 'package:firemax_football/network/api_constant.dart';
+
+
 
 class ApiRepository {
   Dio get _dio => Dio(BaseOptions(
         sendTimeout: 60000,
         contentType: 'application/json',
+        baseUrl: ApiConstants.BASE_URL,
       ));
 
   Future<ModelValidation?> getValidation() async {
     try {
-      Response res = await _dio.get('https://sinop.v-e.info/firemax/main');
-    
+      // Response res = await _dio.get('https://sinop.v-e.info/firemax/main');
+      // Response res = await _dio.get('https://sinop.v-e.info/firemax2023/main');
+      // Response res = await _dio.get('https://sinop.v-e.info/firemaxv2/main');
+      Response res = await _dio.get(ApiConstants.Auth);
+
       if (res.statusCode == 200) {
         return ModelValidation.fromJson(res.data);
       } else {
         return null;
       }
-    } on DioError catch (e) {
-      debugPrint("API VALIDATION ERROR : $e");
+    } on DioError catch (_) {
+      return null;
     }
-    return null;
   }
 
-    Future<ModelHome?> getHome() async {
+  Future<ModelSearch?> getSearch(String keyword, String page) async {
+    var gmt = DateTime.now().toLocal().timeZoneOffset.inHours;
     try {
-      Response res = await _dio.get('https://up.asepnews.com/api?apicall2=77577&key=andromob');
-
+      Response res = await _dio
+          .get("https://nopdev.cyou/v2/search/$keyword?page=$page&gmt=$gmt");
       if (res.statusCode == 200) {
-        return ModelHome.fromJson(res.data);
+        return ModelSearch.fromJson(res.data);
       } else {
         return null;
       }
     } on DioError catch (e) {
-      debugPrint("API HOME ERROR : $e");
+      Exception(e.toString());
     }
     return null;
   }
-    Future<ModelHome?> getSearch(String keyword) async {
-    try {
-      Response res = await _dio.get('https://up.asepnews.com/api?apicall2=cari&keyword=$keyword&key=andromob');
 
+  Future<ModelLive?> getLive() async {
+    var gmt = DateTime.now().toLocal().timeZoneOffset.inHours;
+    try {
+      Response res = await _dio.get("https://nopdev.cyou/v2/live?gmt=$gmt");
       if (res.statusCode == 200) {
-        return ModelHome.fromJson(res.data);
+        return ModelLive.fromJson(res.data);
       } else {
         return null;
       }
     } on DioError catch (e) {
-      debugPrint("API HOME ERROR : $e");
+      Exception(e.toString());
     }
     return null;
+  }
+
+  Future<ModelToday?> getToday(String page) async {
+    var gmt = DateTime.now().toLocal().timeZoneOffset.inHours;
+    try {
+      Response res =
+          await _dio.get("https://nopdev.cyou/v2/today/$page?gmt=$gmt");
+      if (res.statusCode == 200) {
+        return ModelToday.fromJson(res.data);
+      } else {
+        return null;
+      }
+    } on DioError catch (e) {
+      Exception(e.toString());
+    }
+    return null;
+  }
+
+  Future<ModelJadwal?> getJadwal(String date, String page) async {
+    var gmt = DateTime.now().toLocal().timeZoneOffset.inHours;
+    try {
+      Response res =
+          await _dio.get("https://nopdev.cyou/v2/jadwal/$date/$page?gmt=$gmt");
+      if (res.statusCode == 200) {
+        return ModelJadwal.fromJson(res.data);
+      } else {
+        return null;
+      }
+    } on DioError catch (e) {
+      Exception(e.toString());
+    }
+    return null;
+  }
+
+  Future<ModelScore?> getScore(String date, String page) async {
+    var gmt = DateTime.now().toLocal().timeZoneOffset.inHours;
+    try {
+      Response res =
+          await _dio.get("https://nopdev.cyou/v2/jadwal/$date/$page?gmt=$gmt");
+      if (res.statusCode == 200) {
+        return ModelScore.fromJson(res.data);
+      } else {
+        return null;
+      }
+    } on DioError catch (_) {
+      return null;
+    }
+  }
+
+  Future<ModelChannel?> getChannel() async {
+    try {
+      Response res = await _dio.get(ApiConstants.Channel);
+      if (res.statusCode == 200) {
+        return ModelChannel.fromJson(res.data);
+      } else {
+        return null;
+      }
+    } on DioError catch (_) {
+      return null;
+    }
   }
 }
