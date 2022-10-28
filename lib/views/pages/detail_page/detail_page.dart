@@ -1,4 +1,3 @@
-import 'package:firemax_football/bloc/channel/channel_bloc.dart';
 import 'package:firemax_football/bloc/validation/validation_bloc.dart';
 import 'package:firemax_football/constants/constant.dart';
 import 'package:firemax_football/models/match.dart';
@@ -23,13 +22,11 @@ class DetailPage extends StatefulWidget {
 
 class _DetailPageState extends State<DetailPage> {
   late bool isLive;
-  late ChannelBloc channelBloc;
 
   @override
   void initState() {
     super.initState();
-    channelBloc = BlocProvider.of<ChannelBloc>(context);
-    channelBloc.add(LoadChannel(widget.modelMatch!.matchId!));
+
     Wakelock.toggle(enable: true);
     if (widget.modelMatch!.live!.status! == "online") {
       setState(() {
@@ -74,7 +71,11 @@ class _DetailPageState extends State<DetailPage> {
                               urlVideo: widget.modelMatch!.live!.url1!,
                             ),
                           ),
-                          channelButton(context, state.modelValidation),
+                          // channelButton(context, state.modelValidation),
+                          ChannelButton(
+                            modelValidation: state.modelValidation,
+                            matchId: widget.modelMatch!.matchId!,
+                          )
                         ],
                       );
                     } else {

@@ -60,7 +60,7 @@ class _FramePlayState extends State<FramePlay> {
                 style: Theme.of(context).textTheme.bodyText1,
               ),
               Text(
-                "Please Reload !",
+                "Please Check Another Channel !",
                 style: Theme.of(context).textTheme.bodyText2,
               ),
             ],

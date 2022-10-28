@@ -1,13 +1,13 @@
- 
-import 'package:applovin_max/applovin_max.dart';
+
 import 'package:firemax_football/models/detail.dart';
 import 'package:firemax_football/routes/routes_ads.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart'; 
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 import '../../../bloc/validation/validation_bloc.dart';
 import '../../../constants/constant.dart';
+import '../../widgets/costum_show_kotak_banner_ads_semua.dart';
 
 class EmbedPLayer extends StatefulWidget {
   const EmbedPLayer({super.key, required this.modelDetail});
@@ -76,35 +76,7 @@ class _EmbedPLayerState extends State<EmbedPLayer> {
             BlocBuilder<ValidationBloc, ValidationState>(
               builder: (context, state) {
                 if (state is ValidationLoaded) {
-                  if (state.modelValidation.ad!.adActive == "applovin" &&
-                      state.modelValidation.ad!.applovin!.mrec!.status! ==
-                          true) {
-                    return Container(
-                      height: 250,
-                      width: Constant.xSizeWidth(context),
-                      margin: Constant.xSpaceSymetric(
-                        horizontal: 10,
-                        vertical: 10,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Constant.xColorDarkSub,
-                        borderRadius:
-                            BorderRadius.circular(Constant.xDefaultSize),
-                      ),
-                      child: MaxAdView(
-                          adUnitId:
-                              state.modelValidation.ad!.applovin!.mrec!.adUnit!,
-                          adFormat: AdFormat.mrec,
-                          listener: AdViewAdListener(
-                              onAdLoadedCallback: (ad) {},
-                              onAdLoadFailedCallback: (adUnitId, error) {},
-                              onAdClickedCallback: (ad) {},
-                              onAdExpandedCallback: (ad) {},
-                              onAdCollapsedCallback: (ad) {})),
-                    );
-                  } else {
-                    return Container();
-                  }
+                  return const CustomShowKotakBannerAdsSemua();
                 }
                 return Container();
               },

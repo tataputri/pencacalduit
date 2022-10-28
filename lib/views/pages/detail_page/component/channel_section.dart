@@ -8,80 +8,209 @@ import '../../../../bloc/channel/channel_bloc.dart';
 import '../../../../constants/constant.dart';
 import '../../../widgets/button_widget.dart';
 
-Widget channelButton(BuildContext context, ModelValidation modelValidation) {
-  return BlocBuilder<ChannelBloc, ChannelState>(
-    builder: (context, state) {
-    if(state is ChannelLoaded){
-      return Container(
-          width: Constant.xSizeWidth(context),
-          margin: Constant.xSpaceSymetric(
-            horizontal: 10,
-            vertical: 0,
-          ),
-          padding: Constant.xSpaceSymetric(horizontal: 10, vertical: 10),
-          decoration: BoxDecoration(
-            color: Constant.xColorDarkSub,
-            borderRadius: BorderRadius.circular(Constant.xDefaultSize),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              CustomButton(
-                onTap: () {
-                  GoRoute.push(
-                      context: context,
-                      routeName: Constant.xScreenExoPlayer,
-                      modelValidation: modelValidation,
-                      modelDetail: ModelDetail(
-                          title: "Channel 1",
-                          url:
-                              "https://live.fiaqlo.com/live/6413613_3f50309e91dd2a5da8176d341f26d354.m3u8?auth_key=1666813261-6359631de9b26-0-f2f90bdb4bf5bc973858717b13f42955"));
-                },
-                color: Constant.xColorAccents,
-                child: Text(
-                  "Channel 1",
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline6!
-                      .copyWith(color: Constant.xColorDark),
-                ),
-              ),
-              CustomButton(
-                onTap: () {
-                  GoRoute.push(
-                      context: context,
-                      routeName: Constant.xScreenEmbedPLayer,
-                      modelValidation: modelValidation,
-                      modelDetail: ModelDetail(
-                          title: "Channel 2",
-                          url:
-                              "https://live.balbal.cyou/?vid=aHR0cHM6Ly9zcG9ydHNvbmxpbmUudG8vY2hhbm5lbHMvaGQvaGQxLnBocA=="));
-                },
-                color: Constant.xColorAccents,
-                child: Text(
-                  "Channel 2",
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline6!
-                      .copyWith(color: Constant.xColorDark),
-                ),
-              ),
-              CustomButton(
-                onTap: () {},
-                color: Constant.xColorAccents,
-                child: Text(
-                  "Channel 3",
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline6!
-                      .copyWith(color: Constant.xColorDark),
-                ),
-              ),
-            ],
-          ),
-        );
-    }
-      return Container();
-    },
-  );
+class ChannelButton extends StatefulWidget {
+  const ChannelButton({super.key, required this.modelValidation, required this.matchId});
+  final ModelValidation modelValidation;
+  final int matchId;
+
+  @override
+  State<ChannelButton> createState() => _ChannelButtonState();
 }
+
+class _ChannelButtonState extends State<ChannelButton> {
+  late ChannelBloc channelBloc;
+
+  @override
+  void initState() {
+    super.initState();
+    channelBloc = BlocProvider.of<ChannelBloc>(context);
+    channelBloc.add(LoadChannel(widget.matchId));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<ChannelBloc, ChannelState>(
+      builder: (context, state) {
+        if (state is ChannelLoaded) {
+          return Container(
+            width: Constant.xSizeWidth(context),
+            margin: Constant.xSpaceSymetric(
+              horizontal: 10,
+              vertical: 0,
+            ),
+            padding: Constant.xSpaceSymetric(horizontal: 10, vertical: 10),
+            decoration: BoxDecoration(
+              color: Constant.xColorDarkSub,
+              borderRadius: BorderRadius.circular(Constant.xDefaultSize),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CustomButton(
+                  onTap: (state.modelChannel.channel1!.link == "") ? null : () {
+                    if (state.modelChannel.channel1!.isIframe == true) {
+                      GoRoute.push(
+                        context: context,
+                        routeName: Constant.xScreenEmbedPLayer,
+                        modelValidation: widget.modelValidation,
+                        modelDetail: ModelDetail(
+                          title: "Channel 1",
+                          url: state.modelChannel.channel1!.link,
+                        ),
+                      );
+                    } else {
+                      GoRoute.push(
+                        context: context,
+                        routeName: Constant.xScreenExoPlayer,
+                        modelValidation: widget.modelValidation,
+                        modelDetail: ModelDetail(
+                          title: "Channel 1",
+                          url: state.modelChannel.channel1!.link,
+                        ),
+                      );
+                    }
+                  },
+                  color: Constant.xColorAccents,
+                  child: Text(
+                    "Channel 1",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline6!
+                        .copyWith(color: Constant.xColorDark),
+                  ),
+                ),
+                CustomButton(
+                  onTap: (state.modelChannel.channel2!.link == "")
+                      ? null
+                      : () {
+                    if (state.modelChannel.channel2!.isIframe == true) {
+                      GoRoute.push(
+                        context: context,
+                        routeName: Constant.xScreenEmbedPLayer,
+                        modelValidation: widget.modelValidation,
+                        modelDetail: ModelDetail(
+                          title: "Channel 2",
+                          url: state.modelChannel.channel2!.link,
+                        ),
+                      );
+                    } else {
+                      GoRoute.push(
+                        context: context,
+                        routeName: Constant.xScreenExoPlayer,
+                        modelValidation: widget.modelValidation,
+                        modelDetail: ModelDetail(
+                          title: "Channel 2",
+                          url: state.modelChannel.channel2!.link,
+                        ),
+                      );
+                    }
+                  },
+                  color: Constant.xColorAccents,
+                  child: Text(
+                    "Channel 2",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline6!
+                        .copyWith(color: Constant.xColorDark),
+                  ),
+                ),
+                CustomButton(
+                  onTap: (state.modelChannel.channel3!.link == "")
+                      ? null
+                      : () {
+                    if (state.modelChannel.channel3!.isIframe == true) {
+                      GoRoute.push(
+                        context: context,
+                        routeName: Constant.xScreenEmbedPLayer,
+                        modelValidation: widget.modelValidation,
+                        modelDetail: ModelDetail(
+                          title: "Channel 3",
+                          url: state.modelChannel.channel3!.link,
+                        ),
+                      );
+                    } else {
+                      GoRoute.push(
+                        context: context,
+                        routeName: Constant.xScreenExoPlayer,
+                        modelValidation: widget.modelValidation,
+                        modelDetail: ModelDetail(
+                          title: "Channel 3",
+                          url: state.modelChannel.channel3!.link,
+                        ),
+                      );
+                    }
+                  },
+                  color: Constant.xColorAccents,
+                  child: Text(
+                    "Channel 3",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline6!
+                        .copyWith(color: Constant.xColorDark),
+                  ),
+                ),
+              ],
+            ),
+          );
+        }
+        if (state is ChannelError) {
+          return Container(
+            width: Constant.xSizeWidth(context),
+            margin: Constant.xSpaceSymetric(
+              horizontal: 10,
+              vertical: 0,
+            ),
+            padding: Constant.xSpaceSymetric(horizontal: 10, vertical: 10),
+            decoration: BoxDecoration(
+              color: Constant.xColorDarkSub,
+              borderRadius: BorderRadius.circular(Constant.xDefaultSize),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CustomButton(
+                  onTap: null,
+                  color: Constant.xColorAccents,
+                  child: Text(
+                    "Channel 1",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline6!
+                        .copyWith(color: Constant.xColorDark),
+                  ),
+                ),
+                CustomButton(
+                  onTap: null,
+                  color: Constant.xColorAccents,
+                  child: Text(
+                    "Channel 2",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline6!
+                        .copyWith(color: Constant.xColorDark),
+                  ),
+                ),
+                CustomButton(
+                  onTap: null,
+                  color: Constant.xColorAccents,
+                  child: Text(
+                    "Channel 3",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline6!
+                        .copyWith(color: Constant.xColorDark),
+                  ),
+                ),
+              ],
+            ),
+          );
+        }
+        return Container();
+      },
+    );
+  }
+}
+
+// Widget channelButton(BuildContext context, ModelValidation modelValidation) {
+//   return 
+// }

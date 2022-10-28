@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:firemax_football/models/channel.dart';
 import 'package:firemax_football/network/api_repository.dart';
@@ -17,17 +19,14 @@ class ChannelBloc extends Bloc<ChannelEvent, ChannelState> {
       if (data == null) {
         emit(ChannelError());
       } else {
-        if (data.data!.isEmpty) {
-          emit(ChannelError());
-        } else {
-          for (var element in data.data!) {
-            if (event.matchId == element.matchId) {
-              emit(
-                ChannelLoaded(element),
-              );
-            } else {
-              emit(ChannelError());
-            }
+        log(data.data.toString());
+        for (var element in data.data!) {
+          if (event.matchId == element.matchId) {
+            emit(
+              ChannelLoaded(element),
+            );
+          } else {
+            emit(ChannelError());
           }
         }
       }
