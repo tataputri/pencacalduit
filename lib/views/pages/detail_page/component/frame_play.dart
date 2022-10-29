@@ -1,8 +1,8 @@
-import 'package:chewie/chewie.dart'; 
+ import 'package:chewie/chewie.dart';
 import 'package:firemax_football/constants/colors_style.dart';
-import 'package:firemax_football/constants/constant.dart';  
+import 'package:firemax_football/constants/constant.dart';
 import 'package:firemax_football/views/widgets/loading_widget.dart';
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
 class FramePlay extends StatefulWidget {
@@ -30,7 +30,7 @@ class _FramePlayState extends State<FramePlay> {
         isLive: true,
         showOptions: false);
     videoPlayerController!.addListener(() {
-      if (videoPlayerController!.value.hasError) {
+      if (videoPlayerController!.value.hasError) { 
         setState(() {
           isError = true;
         });
@@ -77,7 +77,7 @@ class _FramePlayState extends State<FramePlay> {
   }
 
   Future<void> initializeVideoPlayer(String videoUrl) async {
-    videoPlayerController = VideoPlayerController.network(videoUrl);
+    videoPlayerController = VideoPlayerController.network(videoUrl, );
     await Future.wait([videoPlayerController!.initialize()]);
   }
 

@@ -1,7 +1,9 @@
+import 'dart:developer';
 
 import 'package:firemax_football/models/detail.dart';
 import 'package:firemax_football/routes/routes_ads.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
@@ -60,6 +62,15 @@ class _EmbedPLayerState extends State<EmbedPLayer> {
                 initialUrlRequest: URLRequest(
                   url: Uri.parse(widget.modelDetail.url!),
                 ),
+                onEnterFullscreen: (_) { 
+                  log("full screen");
+                  setState(() {
+                    SystemChrome.setPreferredOrientations([
+                      DeviceOrientation.landscapeRight,
+                      DeviceOrientation.landscapeLeft,
+                    ]);
+                  });
+                },
                 initialOptions: InAppWebViewGroupOptions(
                     crossPlatform: InAppWebViewOptions(
                       useShouldOverrideUrlLoading: false,
