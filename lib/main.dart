@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:applovin_max/applovin_max.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firemax_football/bloc/alternative/alternative_bloc.dart';
 import 'package:firemax_football/bloc/channel/channel_bloc.dart';
 import 'package:firemax_football/bloc/date/date_bloc.dart';
 import 'package:firemax_football/bloc/jadwal/jadwal_bloc.dart';
@@ -66,6 +67,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => ChannelBloc(),
+        ),
+        BlocProvider(
+          create: (context) => AlternativeBloc(),
         ),
       ],
       child: MaterialApp(

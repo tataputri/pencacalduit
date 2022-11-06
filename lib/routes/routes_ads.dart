@@ -94,39 +94,8 @@ class GoRoute {
     required String routeName,
     required ModelValidation modelValidation,
   }) {
-    initialClick++;
-    if (modelValidation.ad!.adActive == "applovin") {
-      return LovinService.intLovinLoad(
-        context: context,
-        typePush: 'pushreplace',
-        nameRoutem: routeName,
-        unitIdInt: modelValidation.ad!.applovin!.interstitial!.adUnit!,
-        modelValidation: modelValidation,
-      );
-    } else {
-      if (initialClick % modelValidation.ad!.adInterval! == 0) {
-        switch (modelValidation.ad!.adActive) {
-          case "fan":
-            return FanService.fanInterstitial(
-                context: context,
-                typePush: 'pushreplace',
-                nameRoutem: routeName,
-                placementId: modelValidation.ad!.fan!.interstitial!.adUnit!,
-                modelValidation: modelValidation);
-          case "admob":
-            return AdmobService.interstitialAd(
-                context: context,
-                typePush: 'pushreplace',
-                nameRoutem: routeName,
-                unitIdInt: modelValidation.ad!.admob!.interstitial!.adUnit!,
-                modelValidation: modelValidation);
-          default:
-        }
-      } else {
-        Navigator.pushReplacementNamed(context, routeName,
-            arguments: ModelRoute(modelValidation: modelValidation));
-      }
-    }
+    Navigator.pushReplacementNamed(context, routeName,
+        arguments: ModelRoute(modelValidation: modelValidation));
   }
 
   static back({

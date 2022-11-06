@@ -1,7 +1,8 @@
-import 'package:firemax_football/constants/constant.dart'; 
+import 'package:firemax_football/constants/constant.dart';
 import 'package:firemax_football/models/model_route.dart';
 import 'package:firemax_football/views/pages/all_live_page/all_live_page.dart';
 import 'package:firemax_football/views/pages/all_match_page/all_match_page.dart';
+import 'package:firemax_football/views/pages/alternative/alternative_page.dart';
 import 'package:firemax_football/views/pages/blokir/blokir_page.dart';
 import 'package:firemax_football/views/pages/dashboard/dashboard.dart';
 import 'package:firemax_football/views/pages/liga/details/detail_liga.dart';
@@ -19,6 +20,8 @@ class RouteGenerate {
     switch (settings.name) {
       case Constant.xScreenRoot:
         return MaterialPageRoute(builder: (_) => const ValidationPage());
+      case Constant.xScreenAlternative:
+        return MaterialPageRoute(builder: (_) => const AlternativePage());
       case Constant.xScreenBlokir:
         return MaterialPageRoute(builder: (_) => const BlokirPage());
       case Constant.xScreenDash:

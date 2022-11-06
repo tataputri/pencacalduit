@@ -12,6 +12,7 @@ class Constant {
   static const String xScreenBlank = "/blank";
   static const String xScreenExoPlayer = "/exo-player";
   static const String xScreenEmbedPLayer = "/embed-player";
+  static const String xScreenAlternative = "/alternative";
   // static const String xScreenALlLiga = "/all-liga";
 
   static const Color xColorDark = Color(0xff222831);

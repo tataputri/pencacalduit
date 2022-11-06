@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:firemax_football/models/alternative.dart';
 import 'package:firemax_football/models/channel.dart';
 import 'package:firemax_football/models/jadwal.dart';
 import 'package:firemax_football/models/live.dart';
@@ -98,7 +99,7 @@ class ApiRepository {
     var gmt = DateTime.now().toLocal().timeZoneOffset.inHours;
     try {
       Response res =
-         await _dio.get("${ApiConstants.Jadwal}/$date/$page?gmt=$gmt");
+          await _dio.get("${ApiConstants.Jadwal}/$date/$page?gmt=$gmt");
       if (res.statusCode == 200) {
         return ModelScore.fromJson(res.data);
       } else {
@@ -115,6 +116,20 @@ class ApiRepository {
 
       if (res.statusCode == 200) {
         return ModelChannel.fromJson(res.data);
+      } else {
+        return null;
+      }
+    } on DioError catch (_) {
+      return null;
+    }
+  }
+
+  Future<ModelAlternative?> getAlternative() async {
+    var gmt = DateTime.now().toLocal().timeZoneOffset.inHours;
+    try {
+      Response res = await _dio.get("https://futs.blifnews.com/getData.php?timezone_offset=$gmt");
+      if (res.data["result"] == "success") {
+        return ModelAlternative.fromJson(res.data);
       } else {
         return null;
       }

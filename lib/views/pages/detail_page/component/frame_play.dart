@@ -56,11 +56,11 @@ class _FramePlayState extends State<FramePlay> {
             children: [
               const Icon(Icons.error, color: Constant.xColorLight),
               Text(
-                "Sorry, Video Can't Be Played...",
+                "STREAM IS OFFLINE.",
                 style: Theme.of(context).textTheme.bodyText1,
               ),
               Text(
-                "Please Check Another Channel !",
+                "Please Check Another Channel & Server!",
                 style: Theme.of(context).textTheme.bodyText2,
               ),
             ],
